@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% url 'human_detail' object.pk %}
+
+{%block content%}
+<div style="margin:auto;width:50%">
+    <legend><h1>{{ object.human_name }}</h1></legend>
+    <text><b>Gender:</b></text><li>{{ object.human_gender }}</li><br>
+    <text><b>Date of Birth:</b></text><li>{{ object.human_date_of_birth }}</li><br>
+    <text><b>Description:</b></text><li>{{ object.human_description }}</li><br>
+    <text><b>Home:</b></text><li>{{ object.human_home }}</li><br>
+    <text><b>Number of cats:</b></text><li>{{ object.cat_set.all|length }}</li><br>
+</div>
+    <br><br>
+    <div style="margin:auto;width:50%">
+        <h1>Cat Ownership</h1>
+    {% for cat in object.cat_set.all %}
+        <h2 style="color:green;"><b>{{ cat.cat_name }}</b></h2>
+        <text><b>Date of Birth:</b></text><li>{{ cat.cat_date_of_birth }}</li><br>
+        <text><b>Description:</b></text><li>{{ cat.cat_description }}</li><br>
+        <text><b>Breed:</b></text><li>{{ cat.cat_breed }}</li>
+    {% endfor %}
+    </div>
+    <br><br>
+
+    <button type="button">
+        <a href="{% url 'human_edit' object.pk %}">Edit</a>
+    </button>
+    <br><br>
+    <form method="POST" action="{% url 'human_confirm_delete' object.pk %}">
+        {% csrf_token %}
+        <button class="deletebtn show-form-delete" type="submit" value="DELETE" onclick="return confirm('Are you sure do you want to delete {{object.human_name}}')">
+            <i class="fa fa-trash-o"></i>
+            Delete</button>
+        </form>
+{%endblock content%}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{%block content%}
+<legend><h1>{{ object.cat_name }}</h1></legend>
+            <text><b>Gender:</b></text><li>{{ object.cat_gender }}</li><br>
+            <text><b>Date of Birth:</b></text><li>{{ object.cat_date_of_birth }}</li><br>
+            <text><b>Description:</b></text><li>{{ object.cat_description }}</li><br>
+            <text><b>Breed:</b></text><li>{{ object.cat_breed }}</li><br>
+            <text><b>Owner:</b></text><li>{{ object.cat_owner }}</li><br>
+            <text><b>Address:</b></text><li>{{ object.cat_owner.human_home.home_address }}</li><br>
+
+            <br><br>
+    <div style="margin:auto;width:50%">
+        <h1>Cat Ownership</h1>
+    {% for cat in object.human_set.all %}
+        <h2 style="color:green;"><b>{{ cat.human_name }}</b></h2>
+    {% endfor %}
+    </div>
+    <br><br>
+
+            <button type="button">
+                <a href="{% url 'cat_edit' object.pk %}">Edit</a>
+            </button>
+            <form method="POST" action="{% url 'cat_confirm_delete' object.pk %}">
+                {% csrf_token %}
+                <button class="deletebtn show-form-delete" type="submit" value="DELETE" onclick="return confirm('Are you sure do you want to delete {{object.home_name}}')">
+                    <i class="fa fa-trash-o"></i>
+                    Delete</button>
+                </form>
+{%endblock content%}

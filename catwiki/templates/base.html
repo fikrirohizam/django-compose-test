@@ -1,0 +1,23 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'catwiki/style.css' %}">
+
+<head>
+    <ul id="nav">
+        {% for name in all_tables%}
+        <li>
+            <a class="{% if request.resolver_match.url_name == name.lower|add:'_list'%}active{%endif%}"
+            href="{% url name.lower|add:'_list' %}">{{name}}</a></li>
+        {% endfor %}
+    </ul>
+</head>
+
+    <body>
+        
+        {% block content %}
+        
+        {% endblock content%}
+        
+    </body>
+
+
+</html>

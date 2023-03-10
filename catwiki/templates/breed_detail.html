@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% url 'breed_detail' object.pk %}
+
+{%block content%}
+<legend><h1>{{ object.breed_name }}</h1></legend>
+            <text><b>Origin:</b></text><li>{{ object.breed_origin }}</li><br>
+            <text><b>Description:</b></text><li>{{ object.breed_description }}</li><br>
+            <button type="button">
+                <a href="{% url 'breed_edit' object.pk %}">Edit</a>
+            </button>
+            <form method="POST" action="{% url 'breed_confirm_delete' object.pk %}">
+                {% csrf_token %}
+                <button class="deletebtn show-form-delete" type="submit" value="DELETE" onclick="return confirm('Are you sure do you want to delete {{object.breed_name}}')">
+                    <i class="fa fa-trash-o"></i>
+                    Delete</button>
+                </form>
+{%endblock content%}

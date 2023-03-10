@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content%}
+<h1>HUMAN LIST</h1>
+<ul>
+{% for human in human_list %}
+    <li><h2><a href="{% url 'human_detail' human.id %}"> {{ human.human_name }}</a></h2></li>
+{% endfor %}
+</ul>
+<button type="button">
+    <a href="{% url 'human_create' %}">Create new</a>
+</button>
+{% endblock content%}
+
+
+

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% url 'home_detail' object.pk %}
+
+{%block content%}
+<legend><h1>{{ object.home_name }}</h1></legend>
+            <text><b>Address:</b></text><li>{{ object.home_address }}</li><br>
+            <text><b>House Type:</b></text><li>{{ object.house_type }}</li>
+
+            <button type="button">
+                <a href="{% url 'home_edit' object.pk %}">Edit</a>
+            </button>
+            <form method="POST" action="{% url 'home_confirm_delete' object.pk %}">
+                {% csrf_token %}
+                <button class="deletebtn show-form-delete" type="submit" value="DELETE" onclick="return confirm('Are you sure do you want to delete {{object.home_name}}')">
+                    <i class="fa fa-trash-o"></i>
+                    Delete</button>
+                </form>
+{%endblock content%}

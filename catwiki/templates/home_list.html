@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content%}
+<h1>HOME LIST</h1>
+
+<h2>Landed</h2>
+<ul>
+{% for home in home_list %}
+    {% if not home.house_type == 'condominium' %}
+    <li><h2><a href="{% url 'home_detail' home.id %}"> {{ home.home_name }}</a></h2></li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+<h2>Condominium</h2>
+<ul>
+{% for home in home_list %}
+    {% if home.house_type == 'condominium' %}
+    <li><h2><a href="{% url 'home_detail' home.id %}"> {{ home.home_name }}</a></h2></li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+<button type="button">
+    <a href="{% url 'home_create' %}">Create new</a>
+</button>
+{% endblock content%}
+
+
+

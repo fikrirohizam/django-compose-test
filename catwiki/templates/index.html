@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'catwiki/style.css' %}">
+
+{% block content%}
+<div class="container">
+    <div class="text-center mb-5">
+      <h1>Cat Wiki</h1>
+      <p class="lead">Select from list</p>
+    </div>
+
+    
+    {%for model in all_models%}
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex flex-column flex-lg-row">
+          <div class="row flex-fill">
+            <div class="col-sm-3 text-lg-end">
+              <a style="font-size:50px;" href="{% url model.lower|add:'_list' %}" class="btn btn-primary stretched-link">{{model|capfirst}}</a>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+{% endblock content%}
+   

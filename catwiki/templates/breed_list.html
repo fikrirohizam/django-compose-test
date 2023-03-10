@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content%}
+<h1>BREED LIST</h1>
+<ul>
+{% for breed in breed_list %}
+    <li><h2><a href="{% url 'breed_detail' breed.id %}"> {{ breed.breed_name }}</a></h2></li>
+{% endfor %}
+</ul>
+<button type="button">
+    <a href="{% url 'breed_create' %}">Create new</a>
+</button>
+{% endblock content%}
+
+
+

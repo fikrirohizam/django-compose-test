@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+
+{% block content%}
+<h1>CAT LIST</h1>
+<ul>
+{% for cat in cat_list %}
+    <li><h2><a href="{% url 'cat_detail' cat.id %}"> {{ cat.cat_name}} ({{ cat.cat_date_of_birth|get_age}})</a></h2></li>
+{% endfor %}
+</ul>
+<button type="button">
+    <a href="{% url 'cat_create' %}">Create new</a>
+</button>
+{% endblock content%}
+
+
+
